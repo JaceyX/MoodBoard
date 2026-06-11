@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="sidepanel.css" />
+  <title>豆包画板</title>
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><span class="brand-mark">画板</span><span class="brand-sub">MOODBOARD</span></div>
+    <div class="top-actions">
+      <button id="historyBtn" class="txt-btn" title="历史任务">🕘 历史</button>
+      <button id="newBtn" class="icon-btn" title="新建任务">＋</button>
+      <button id="settingsBtn" class="icon-btn" title="设置">⚙</button>
+    </div>
+  </header>
+
+  <!-- ============ 任务视图 ============ -->
+  <div id="taskView" class="view">
+    <div class="task-bar">
+      <input id="taskTitle" class="task-title" placeholder="未命名任务" />
+      <span id="count" class="count">0 / 10</span>
+    </div>
+
+    <div id="keyBanner" class="banner hidden">
+      还没填豆包 API Key。<button id="openOptions" class="link">去设置 →</button>
+    </div>
+
+    <section id="resultWrap" class="result hidden">
+      <img id="resultImg" alt="融合结果" />
+      <div id="resultStrip" class="strip"></div>
+      <div class="result-bar">
+        <button id="iterateBtn" class="btn small accent">在此基础上改</button>
+        <button id="downloadBtn" class="btn small ghost">下载</button>
+        <button id="closeResult" class="btn small ghost">收起</button>
+      </div>
+    </section>
+
+    <main id="list" class="list"></main>
+
+    <div id="empty" class="empty">
+      <div class="empty-art">⊹</div>
+      <p>在任意网页图片上右键<br />选「➕ 加入豆包画板」开始采集。</p>
+    </div>
+
+    <footer class="dock">
+      <textarea id="globalPrompt" class="global" rows="2"
+        placeholder="最终想要的画面（整体描述，可留空让模型自由发挥）"></textarea>
+
+      <div class="prompt-tool">
+        <button id="promptToggle" class="prompt-toggle" aria-expanded="false">
+          <span class="chev">▸</span><span>最终提示词</span>
+          <span id="promptFlag" class="flag hidden">已手动编辑</span>
+        </button>
+        <div id="promptPanel" class="prompt-panel hidden">
+          <textarea id="promptBox" class="global" rows="6"
+            placeholder="发送给模型的完整提示词"></textarea>
+          <button id="promptReset" class="link hidden">恢复自动生成</button>
+        </div>
+      </div>
+
+      <div class="dock-row">
+        <select id="sizeSel" class="size" title="输出尺寸">
+          <option value="1K">1K</option>
+          <option value="2K">2K</option>
+          <option value="4K">4K</option>
+        </select>
+        <button id="genBtn" class="btn primary">
+          <span class="btn-label">融合生成</span>
+          <span class="spinner hidden"></span>
+        </button>
+      </div>
+      <p id="statusMsg" class="status"></p>
+    </footer>
+  </div>
+
+  <!-- ============ 历史视图 ============ -->
+  <div id="historyView" class="view hidden">
+    <div class="hist-head">
+      <button id="backBtn" class="icon-btn" title="返回">←</button>
+      <span class="hist-title-bar">历史任务</span>
+    </div>
+    <div id="histList" class="hist-list"></div>
+    <div id="histEmpty" class="empty hidden"><p>还没有历史任务。</p></div>
+  </div>
+
+  <!-- 参考图卡片模板 -->
+  <template id="cardTpl">
+    <article class="card" data-id="">
+      <div class="card-thumb">
+        <span class="grip" draggable="true" title="拖动排序">⠿</span>
+        <span class="stamp">图 <em class="idx">1</em></span>
+        <img class="thumb-img" alt="参考图" />
+        <button class="del" title="移除">×</button>
+      </div>
+      <div class="card-body">
+        <select class="dim"></select>
+        <input class="note" type="text" placeholder="补充说明（指定元素时务必填）" />
+      </div>
+    </article>
+  </template>
+
+  <!-- 历史行模板 -->
+  <template id="histTpl">
+    <div class="hist-row" data-id="">
+      <div class="hist-thumb"><img alt="" /></div>
+      <div class="hist-meta">
+        <div class="h-title"></div>
+        <div class="h-sub"></div>
+      </div>
+      <button class="hist-del" title="删除">×</button>
+    </div>
+  </template>
+
+  <script type="module" src="sidepanel.js"></script>
+</body>
+</html>

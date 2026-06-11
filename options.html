@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>豆包画板 · 设置</title>
+  <style>
+    :root { --accent:#e8a04b; --line:#3a3a44; --surface:#26262c; --surface-2:#2f2f37; }
+    body { margin:0; background:#1a1a1e; color:#ececef;
+      font:14px/1.6 system-ui,"PingFang SC","Microsoft YaHei",sans-serif;
+      display:flex; justify-content:center; padding:40px 16px; }
+    .wrap { width:100%; max-width:480px; }
+    h1 { font-size:18px; letter-spacing:1px; margin:0 0 4px; }
+    .sub { color:#9a9aa6; font-size:12px; margin:0 0 24px; }
+    label { display:block; font-size:12px; color:#cfcfd6; margin:18px 0 6px; }
+    input[type=text], input[type=password], select {
+      width:100%; box-sizing:border-box; background:var(--surface-2);
+      color:#ececef; border:1px solid var(--line); border-radius:8px; padding:10px;
+      font:inherit; }
+    .row { display:flex; align-items:center; gap:8px; margin-top:18px; }
+    .row input { width:auto; }
+    .hint { font-size:11px; color:#80808c; margin-top:6px; }
+    .hint a { color:var(--accent); }
+    button { margin-top:26px; background:var(--accent); color:#1a1a1e; border:none;
+      border-radius:8px; padding:11px 20px; font:inherit; font-weight:600; cursor:pointer; }
+    button:hover { background:#cf8b3a; }
+    .saved { color:var(--accent); font-size:12px; margin-left:12px; }
+    :focus-visible { outline:2px solid var(--accent); outline-offset:1px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>豆包画板 · 设置</h1>
+    <p class="sub">凭据只保存在本机浏览器（chrome.storage.local），不会上传。</p>
+
+    <label for="apiKey">火山方舟 API Key（ARK_API_KEY）</label>
+    <input id="apiKey" type="password" placeholder="粘贴你的 ARK_API_KEY" autocomplete="off" />
+    <p class="hint">在
+      <a href="https://console.volcengine.com/ark" target="_blank">火山方舟控制台 → API Key 管理</a>
+      获取；并在「开通管理」里开通 Seedream（图片生成）模型。</p>
+
+    <label for="model">模型</label>
+    <input id="model" type="text" placeholder="doubao-seedream-4-0-250828" />
+    <p class="hint">默认 4.0。若你账号开通的是 4.5 / 5.0，填对应模型 ID 或推理接入点 ID（ep-…）即可。</p>
+
+    <div class="row">
+      <input id="watermark" type="checkbox" checked />
+      <label for="watermark" style="margin:0;">输出添加水印</label>
+    </div>
+
+    <div>
+      <button id="save">保存</button>
+      <span id="saved" class="saved"></span>
+    </div>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>
